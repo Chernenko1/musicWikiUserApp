@@ -1,11 +1,14 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
-import {Text} from 'react-native-paper';
 import {HomeParamList} from '../navigation/HomeStack';
 import {Header} from '../components/GroupInfoComponents/Header';
 import {Inforamtion} from '../components/GroupInfoComponents/Information';
+
 import {COLORS} from '../themes/COLORS';
+
+import {Client} from 'pg';
+
 
 export type Props = NativeStackScreenProps<HomeParamList, 'SInfo'>;
 
