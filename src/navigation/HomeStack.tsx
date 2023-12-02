@@ -14,7 +14,7 @@ const nativeStackOption: NativeStackNavigationOptions = {
 export type HomeParamList = {
   SHome: undefined;
   SInfo: {
-    obj: GROUPS;
+    id: number;
   };
 };
 

@@ -40,6 +40,7 @@ export const groupsSlice = createSlice({
   initialState,
   reducers: {
     setGroups(state, action) {
+      console.log(1);
       state.groupsData = action.payload;
     },
     setMusicStyle(state, action) {

@@ -6,9 +6,7 @@ import {GroupCard} from './GroupCard';
 import {COLORS} from '../../themes/COLORS';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {HomeParamList} from '../../navigation/HomeStack';
-import {fetchGroups} from '../../http/groupAPI';
 import {useAppDispatch, useAppSelector} from '../../redux/hooks';
-import {setGroups} from '../../redux/slices/groupSlice';
 
 export type Prop = NativeStackScreenProps<HomeParamList, 'SHome'>;
 
@@ -18,13 +16,6 @@ interface Props {
 
 export const GroupCards = ({mid = 0}: Props) => {
   const navigation = useNavigation();
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    fetchGroups()
-      .then(data => dispatch(setGroups(data.groups.rows)))
-      .catch(e => console.log(e));
-  }, []);
 
   let groups = useAppSelector(state => state.groups.groupsData);
 
@@ -40,7 +31,7 @@ export const GroupCards = ({mid = 0}: Props) => {
         renderItem={({item}) => (
           <TouchableRipple
             onPress={() => {
-              navigation.navigate('SInfo', {obj: item});
+              navigation.navigate('SInfo', {id: item.id});
             }}
             borderless
             rippleColor="gray"

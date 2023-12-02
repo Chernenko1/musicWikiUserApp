@@ -1,12 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {StyleSheet, View, FlatList} from 'react-native';
 import {Text, TouchableRipple} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {useAppDispatch, useAppSelector} from '../../redux/hooks';
-import {setMusicStyle} from '../../redux/slices/groupSlice';
-
+import {useAppSelector} from '../../redux/hooks';
 import {COLORS} from '../../themes/COLORS';
-import {fetchMusicS} from '../../http/musicStyleAPI';
 
 interface Props {
   handleId: any;
@@ -15,15 +12,7 @@ interface Props {
 export const Header = ({handleId}: Props) => {
   const [isActive, setActive] = useState(0);
 
-  const dispatch = useAppDispatch();
-
   const mStyles = useAppSelector(state => state.groups.musicStyleData);
-
-  useEffect(() => {
-    fetchMusicS()
-      .then(data => dispatch(setMusicStyle(data.musicStyle)))
-      .catch(e => console.log(e));
-  }, []);
 
   const setId = (id: number) => {
     handleId(id);

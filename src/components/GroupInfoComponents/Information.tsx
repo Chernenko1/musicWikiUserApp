@@ -6,23 +6,27 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {COLORS} from '../../themes/COLORS';
 import {ShortDescription} from './ShortDescription';
 import {Description} from './Description';
+import {SongPrev} from './SongPrev';
+import {AwardPrev} from './AwardPrev';
 
 interface Props {
-  describe: string;
+  data: Group;
   navigation: any;
 }
 
-export const Inforamtion: React.FC<Props> = ({describe, navigation}) => {
+export const Inforamtion: React.FC<Props> = ({data, navigation}) => {
   return (
     <View style={styles.container}>
       <ScrollView>
         <>
           <View>
-            <Text style={styles.title_text}>Title</Text>
+            <Text style={styles.title_text}>{data.group_name}</Text>
           </View>
-          <ShortDescription />
+          <ShortDescription year={data.creation_year} />
         </>
-        <Description describe={describe} />
+        <Description describe={data.description} />
+        <SongPrev />
+        <AwardPrev />
       </ScrollView>
     </View>
   );

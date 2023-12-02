@@ -47,6 +47,8 @@ declare interface Song {
   lyrics: string;
   duration: string;
   'music_style.style_name'?: string;
+  'group.group_name'?: string;
+  'album.album_name'?: string;
 }
 
 declare interface PR {
