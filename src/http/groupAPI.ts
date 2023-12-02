@@ -11,11 +11,6 @@ export const fetchGroups = async () => {
     const {data} = await $host.get('api/group');
     return data;
   } catch (e) {
-    console.log(2 + e);
+    console.log(e);
   }
-};
-
-export const fetchOneGroup = async (id: any) => {
-  const {data} = await $host.get('api/group/' + id);
-  return data;
 };

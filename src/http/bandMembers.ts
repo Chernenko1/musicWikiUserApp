@@ -1,20 +1,20 @@
-import { $authHost } from "./index";
+import {$host} from './index';
 
 export const createBandMember = async (params: any) => {
-  const { data } = await $authHost.post("api/bmember", params);
+  const {data} = await $host.post('api/bmember', params);
   return data;
 };
 
 //ID - album and other
 export const fetchBandMembers = async (id: any) => {
-  const { data } = await $authHost.get("api/bmember/" + id);
+  const {data} = await $host.get('api/bmember/' + id);
   return data;
 };
 
 export const destroyBandMember = async (id: any) => {
-  await $authHost.delete("api/bmember", { data: id });
+  await $host.delete('api/bmember', {data: id});
 };
 
 export const updateBandMember = async (id: any, param: any) => {
-  await $authHost.put("api/award/update/" + id, param);
+  await $host.put('api/award/update/' + id, param);
 };
