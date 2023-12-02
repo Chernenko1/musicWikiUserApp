@@ -3,30 +3,27 @@ import {FlatList, ImageBackground, StyleSheet, View} from 'react-native';
 import {Text, TouchableRipple} from 'react-native-paper';
 import {useNavigation} from '@react-navigation/native';
 import {GroupCard} from './GroupCard';
-
-import {groups} from '../../data/groups';
 import {COLORS} from '../../themes/COLORS';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {HomeParamList} from '../../navigation/HomeStack';
 import {fetchGroups} from '../../http/groupAPI';
-import axios from 'axios';
+import {useAppDispatch, useAppSelector} from '../../redux/hooks';
+import {setGroups} from '../../redux/slices/groupSlice';
 
 export type Props = NativeStackScreenProps<HomeParamList, 'SHome'>;
 
 export const GroupCards: React.FC<Props> = ({}) => {
   const navigation = useNavigation();
 
-  const fetchA = async () => {
-    const res = await fetch('http://10.0.2.2:4848/');
-    const dta = await res.json();
-    return dta;
-  };
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     fetchGroups()
-      .then(data => console.log(data))
+      .then(data => dispatch(setGroups(data.groups.rows)))
       .catch(e => console.log(e));
   }, []);
+
+  const groups = useAppSelector(state => state.groups.groupsData);
 
   return (
     <View style={styles.container}>
@@ -42,9 +39,11 @@ export const GroupCards: React.FC<Props> = ({}) => {
             rippleColor="gray"
             style={{marginBottom: 20, marginTop: 2}}>
             <GroupCard
-              image={item.image}
-              title={item.name}
-              style={item.music_style}
+              image={
+                'https://1000marcas.net/wp-content/uploads/2020/03/Logo-Queen-2048x1280.png'
+              }
+              title={item.group_name}
+              style={item['music_style.style_name']}
             />
           </TouchableRipple>
         )}

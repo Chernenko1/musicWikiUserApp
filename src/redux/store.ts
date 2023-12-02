@@ -1,14 +1,30 @@
-import {configureStore} from '@reduxjs/toolkit';
-import userReducer from './slices/userSlice';
+import {combineReducers, configureStore} from '@reduxjs/toolkit';
 import groupReducer from './slices/groupSlice';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {persistReducer, persistStore} from 'redux-persist';
 
-export const store = configureStore({
-  reducer: {
-    user: userReducer,
-    groups: groupReducer,
-  },
+const groupPersistConfig = {
+  key: 'groups',
+  storage: AsyncStorage,
+  // whitelist: ['groupsData'],
+};
+
+const groupsPersistReducer = persistReducer(groupPersistConfig, groupReducer);
+
+const reducers = combineReducers({
+  groups: groupsPersistReducer,
 });
 
-export type RootState = ReturnType<typeof store.getState>;
+export const store = configureStore({
+  reducer: reducers,
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+      immutableCheck: false,
+    }),
+});
 
+export const persistor = persistStore(store);
+
+export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

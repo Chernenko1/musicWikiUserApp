@@ -10,6 +10,7 @@ interface Props {
 }
 
 export const GroupCard: React.FC<Props> = ({image, title, style}) => {
+  // console.log(style);
   return (
     <View style={styles.container}>
       <View>

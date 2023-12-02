@@ -1,8 +1,8 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { RootState } from "../store";
+import {createSlice} from '@reduxjs/toolkit';
+import {RootState} from '../store';
 
 interface GroupsState {
-  groupsData: [];
+  groupsData: Group[];
   musicStyleData: MusicStyles[];
   roles: Roles[];
   cities: City[];
@@ -36,10 +36,11 @@ const initialState: GroupsState = {
 };
 
 export const groupsSlice = createSlice({
-  name: "groups",
+  name: 'groups',
   initialState,
   reducers: {
     setGroups(state, action) {
+      console.log(1);
       state.groupsData = action.payload;
     },
     setMusicStyle(state, action) {
