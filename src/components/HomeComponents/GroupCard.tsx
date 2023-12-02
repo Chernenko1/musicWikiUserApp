@@ -6,17 +6,16 @@ import {COLORS} from '../../themes/COLORS';
 interface Props {
   image: string;
   title: string;
-  style: string;
+  style: string | undefined;
 }
 
 export const GroupCard: React.FC<Props> = ({image, title, style}) => {
-  // console.log(style);
   return (
     <View style={styles.container}>
       <View>
         <View style={styles.title_style}>
           <Text style={{color: COLORS.GRAY, fontSize: 15}}>
-            {style.toUpperCase()}
+            {style !== undefined ? style.toUpperCase() : 'нет данных'}
           </Text>
         </View>
         <View style={styles.title}>

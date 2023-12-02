@@ -10,11 +10,14 @@ import {fetchGroups} from '../../http/groupAPI';
 import {useAppDispatch, useAppSelector} from '../../redux/hooks';
 import {setGroups} from '../../redux/slices/groupSlice';
 
-export type Props = NativeStackScreenProps<HomeParamList, 'SHome'>;
+export type Prop = NativeStackScreenProps<HomeParamList, 'SHome'>;
 
-export const GroupCards: React.FC<Props> = ({}) => {
+interface Props {
+  mid: number;
+}
+
+export const GroupCards = ({mid = 0}: Props) => {
   const navigation = useNavigation();
-
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -23,7 +26,11 @@ export const GroupCards: React.FC<Props> = ({}) => {
       .catch(e => console.log(e));
   }, []);
 
-  const groups = useAppSelector(state => state.groups.groupsData);
+  let groups = useAppSelector(state => state.groups.groupsData);
+
+  if (mid !== 0) {
+    groups = groups.filter(itm => itm.music_style_id == mid);
+  }
 
   return (
     <View style={styles.container}>
