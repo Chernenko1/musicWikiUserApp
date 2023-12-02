@@ -28,7 +28,6 @@ export const InfoScreen: React.FC<Props> = ({navigation, route}) => {
     fetchConcerts(id).then((data: any) => setConcerts(data));
 
     fetchPrs(id).then((data: any) => setPressR(data.data));
-    fetchAwards(id).then((data: any) => setAward(data.data));
   }, []);
 
   return (

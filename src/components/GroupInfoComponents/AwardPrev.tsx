@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useContext} from 'react';
-import {View, StyleSheet, Image} from 'react-native';
+import {View, StyleSheet, Image, ScrollView} from 'react-native';
 import {Text} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -46,14 +46,11 @@ export const AwardPrev = () => {
                     height={50}
                   />
                 </View>
-                <View style={styles.songInfo}>
+                <View style={styles.Info}>
                   <Text style={styles.titleText}>{itm.award_name}</Text>
                   <Text style={[styles.titleText, {fontSize: 14}]}>
-                    {itm.date}
+                    {itm.date.slice(0, 10)}
                   </Text>
-                </View>
-                <View>
-                  <Text style={{color: COLORS.TEXT_GRAY_COLOR}}>0:00</Text>
                 </View>
               </View>
             ),
@@ -65,17 +62,17 @@ export const AwardPrev = () => {
 
 const styles = StyleSheet.create({
   content: {
-    flexDirection: 'row',
     alignItems: 'center',
+    flexDirection: 'row',
     columnGap: 15,
     marginBottom: 10,
     backgroundColor: 'rgba(238, 238, 238, 0.03)',
     borderRadius: 12,
+    padding: 10,
   },
-  songInfo: {
+  Info: {
     rowGap: 2,
-    justifyContent: 'space-between',
-    flexBasis: '65%',
+    flexWrap: 'wrap',
   },
   imageCont: {
     backgroundColor: 'rgba(238, 238, 238, 0.1)',
@@ -84,6 +81,7 @@ const styles = StyleSheet.create({
   },
   titleText: {
     color: COLORS.TEXT_GRAY_COLOR,
+    maxWidth: '90%',
     fontSize: 16,
   },
   headerText: {
