@@ -10,6 +10,7 @@ import {SongScreen} from '../screens/SongsScreen';
 import {AwardsScreen} from '../screens/AwardsScreen';
 import {PRScreen} from '../screens/PressReleasesScreen';
 import {ConcertsScreen} from '../screens/ConcertsScreen';
+import {Player} from '../screens/PlayerScreen';
 
 const nativeStackOption: NativeStackNavigationOptions = {
   headerShown: false,
@@ -32,6 +33,9 @@ export type HomeParamList = {
   SConcerts: {
     concerts: Concert[];
   };
+  Player: {
+    info: Song;
+  };
 };
 
 const Stack = createNativeStackNavigator<HomeParamList>();
@@ -45,6 +49,7 @@ export const HomeStack = () => {
       <Stack.Screen name="SAward" component={AwardsScreen} />
       <Stack.Screen name="SPR" component={PRScreen} />
       <Stack.Screen name="SConcerts" component={ConcertsScreen} />
+      <Stack.Screen name="Player" component={Player} />
     </Stack.Navigator>
   );
 };

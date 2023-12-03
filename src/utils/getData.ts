@@ -1,7 +1,6 @@
 import {useEffect} from 'react';
 import {useAppDispatch} from '../redux/hooks';
 import {
-  setAlbums,
   setCities,
   setGroups,
   setMusicStyle,
@@ -11,12 +10,6 @@ import {fetchGroups} from '../http/groupAPI';
 import {fetchRoles} from '../http/roleAPI';
 import {fetchCities} from '../http/cityAPI';
 import {fetchMusicS} from '../http/musicStyleAPI';
-import {fetchAlbums, fetchAllAlbums} from '../http/albumAPI';
-import {fetchBandMembers} from '../http/bandMembers';
-import {fetchConcerts} from '../http/concertAPI';
-import {fetchSongs} from '../http/songAPI';
-import {fetchPrs} from '../http/prAPI';
-import {fetchAwards} from '../http/awardsAPI';
 
 export const getData = () => {
   const dispatch = useAppDispatch();

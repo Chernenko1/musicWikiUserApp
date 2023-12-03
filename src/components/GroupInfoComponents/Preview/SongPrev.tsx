@@ -7,6 +7,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {COLORS} from '../../../themes/COLORS';
 import {InfoContext} from '../../../context/InfoContext';
 import {fetchSongs} from '../../../http/songAPI';
+import {playSound} from '../../../utils/playSound';
 
 export const SongPrev = () => {
   const [hideText, setHideText] = useState<boolean>(false);
@@ -59,9 +60,15 @@ export const SongPrev = () => {
                     {itm['group.group_name']}
                   </Text>
                 </View>
-                <View>
-                  <Text style={{color: COLORS.TEXT_GRAY_COLOR}}>0:00</Text>
-                </View>
+                <TouchableOpacity onPress={() => playSound(itm.songfile)}>
+                  <View>
+                    <Icon
+                      name="play-outline"
+                      color={COLORS.TEXT_GRAY_COLOR}
+                      size={24}
+                    />
+                  </View>
+                </TouchableOpacity>
               </View>
             ),
         )}

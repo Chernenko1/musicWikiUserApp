@@ -46,6 +46,7 @@ declare interface Song {
   song_name: string;
   lyrics: string;
   duration: string;
+  songfile: string;
   'music_style.style_name'?: string;
   'group.group_name'?: string;
   'album.album_name'?: string;
