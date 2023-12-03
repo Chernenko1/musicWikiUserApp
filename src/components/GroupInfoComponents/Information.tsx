@@ -6,8 +6,10 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {COLORS} from '../../themes/COLORS';
 import {ShortDescription} from './ShortDescription';
 import {Description} from './Description';
-import {SongPrev} from './SongPrev';
-import {AwardPrev} from './AwardPrev';
+import {SongPrev} from './Preview/SongPrev';
+import {AwardPrev} from './Preview/AwardPrev';
+import {PressRPrev} from './Preview/PressRPrev';
+import {ConcertPrev} from './Preview/ConcetsPrev';
 
 interface Props {
   data: Group;
@@ -27,6 +29,8 @@ export const Inforamtion: React.FC<Props> = ({data, navigation}) => {
         <Description describe={data.description} />
         <SongPrev />
         <AwardPrev />
+        <PressRPrev />
+        <ConcertPrev />
       </ScrollView>
     </View>
   );

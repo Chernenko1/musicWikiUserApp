@@ -15,7 +15,7 @@ interface Props {
 }
 
 export const GroupCards = ({mid = 0}: Props) => {
-  const navigation = useNavigation();
+  const navigation: any = useNavigation();
 
   let groups = useAppSelector(state => state.groups.groupsData);
 

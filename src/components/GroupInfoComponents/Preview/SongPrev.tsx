@@ -1,56 +1,66 @@
 import React, {useState, useEffect, useContext} from 'react';
-import {View, StyleSheet, Image, ScrollView} from 'react-native';
+import {View, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import {Text} from 'react-native-paper';
+import {useNavigation} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import {COLORS} from '../../themes/COLORS';
-import {InfoContext} from '../../context/InfoContext';
-import {fetchAwards} from '../../http/awardsAPI';
+import {COLORS} from '../../../themes/COLORS';
+import {InfoContext} from '../../../context/InfoContext';
+import {fetchSongs} from '../../../http/songAPI';
 
-export const AwardPrev = () => {
-  const [award, setAward] = useState<Award[]>([]);
+export const SongPrev = () => {
+  const [hideText, setHideText] = useState<boolean>(false);
+  const [songs, setSongs] = useState<Song[]>([]);
+
+  const navigation = useNavigation();
 
   const id = useContext(InfoContext);
 
   useEffect(() => {
-    fetchAwards(id).then((data: any) => setAward(data.data));
+    fetchSongs(id).then((data: any) => setSongs(data.data));
   }, []);
 
   return (
     <View>
       <View style={styles.header}>
         <Text style={[styles.headerText, {fontSize: 25, fontWeight: '700'}]}>
-          Награды
+          Песни
         </Text>
-        <View style={{flexDirection: 'row', columnGap: 2}}>
-          <Text style={[styles.headerText, {fontSize: 17}]}>Всё</Text>
-          <Icon
-            name="chevron-forward-outline"
-            style={{color: COLORS.TEXT_GRAY_COLOR, top: 4}}
-            size={18}
-          />
-        </View>
+        <TouchableOpacity
+          onPress={() => navigation.push('SSong', {songs})}
+          activeOpacity={0.7}>
+          <View style={{flexDirection: 'row', columnGap: 2}}>
+            <Text style={[styles.headerText, {fontSize: 17}]}>Всё</Text>
+            <Icon
+              name="chevron-forward-outline"
+              style={{color: COLORS.TEXT_GRAY_COLOR, top: 4}}
+              size={18}
+            />
+          </View>
+        </TouchableOpacity>
       </View>
-
       <View>
-        {award.map(
+        {songs.map(
           (itm, ind) =>
             ind < 2 && (
               <View key={itm.id + 'sg'} style={styles.content}>
                 <View style={styles.imageCont}>
                   <Image
                     source={{
-                      uri: 'https://1000marcas.net/wp-content/uploads/2020/03/Logo-Queen-2048x1280.png',
+                      uri: 'https://www.pngarts.com/files/4/Vinyl-PNG-Free-Download.png',
                     }}
                     width={50}
                     height={50}
                   />
                 </View>
-                <View style={styles.Info}>
-                  <Text style={styles.titleText}>{itm.award_name}</Text>
+                <View style={styles.songInfo}>
+                  <Text style={styles.titleText}>{itm.song_name}</Text>
                   <Text style={[styles.titleText, {fontSize: 14}]}>
-                    {itm.date.slice(0, 10)}
+                    {itm['group.group_name']}
                   </Text>
+                </View>
+                <View>
+                  <Text style={{color: COLORS.TEXT_GRAY_COLOR}}>0:00</Text>
                 </View>
               </View>
             ),
@@ -62,17 +72,17 @@ export const AwardPrev = () => {
 
 const styles = StyleSheet.create({
   content: {
-    alignItems: 'center',
     flexDirection: 'row',
+    alignItems: 'center',
     columnGap: 15,
     marginBottom: 10,
     backgroundColor: 'rgba(238, 238, 238, 0.03)',
     borderRadius: 12,
-    padding: 10,
   },
-  Info: {
+  songInfo: {
     rowGap: 2,
-    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    flexBasis: '65%',
   },
   imageCont: {
     backgroundColor: 'rgba(238, 238, 238, 0.1)',
@@ -81,7 +91,6 @@ const styles = StyleSheet.create({
   },
   titleText: {
     color: COLORS.TEXT_GRAY_COLOR,
-    maxWidth: '90%',
     fontSize: 16,
   },
   headerText: {

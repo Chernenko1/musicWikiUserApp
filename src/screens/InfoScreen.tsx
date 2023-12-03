@@ -7,9 +7,6 @@ import {Header} from '../components/GroupInfoComponents/Header';
 import {Inforamtion} from '../components/GroupInfoComponents/Information';
 
 import {COLORS} from '../themes/COLORS';
-import {fetchConcerts} from '../http/concertAPI';
-import {fetchPrs} from '../http/prAPI';
-import {fetchAwards} from '../http/awardsAPI';
 import {InfoContext} from '../context/InfoContext';
 
 export type Props = NativeStackScreenProps<HomeParamList, 'SInfo'>;
@@ -20,15 +17,6 @@ export const InfoScreen: React.FC<Props> = ({navigation, route}) => {
   const group = useAppSelector(state => state.groups.groupsData).find(
     item => item.id == id,
   );
-
-  const [conserts, setConcerts] = useState<Concert[]>([]);
-  const [pressR, setPressR] = useState<PR[]>([]);
-
-  useEffect(() => {
-    fetchConcerts(id).then((data: any) => setConcerts(data));
-
-    fetchPrs(id).then((data: any) => setPressR(data.data));
-  }, []);
 
   return (
     <InfoContext.Provider value={id}>
