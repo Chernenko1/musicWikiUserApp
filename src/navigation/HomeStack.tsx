@@ -9,6 +9,7 @@ import {GROUPS} from '../data/groups';
 import {SongScreen} from '../screens/SongsScreen';
 import {AwardsScreen} from '../screens/AwardsScreen';
 import {PRScreen} from '../screens/PressReleasesScreen';
+import {ConcertsScreen} from '../screens/ConcertsScreen';
 
 const nativeStackOption: NativeStackNavigationOptions = {
   headerShown: false,
@@ -28,6 +29,9 @@ export type HomeParamList = {
   SPR: {
     pressR: PR[];
   };
+  SConcerts: {
+    concerts: Concert[];
+  };
 };
 
 const Stack = createNativeStackNavigator<HomeParamList>();
@@ -40,6 +44,7 @@ export const HomeStack = () => {
       <Stack.Screen name="SSong" component={SongScreen} />
       <Stack.Screen name="SAward" component={AwardsScreen} />
       <Stack.Screen name="SPR" component={PRScreen} />
+      <Stack.Screen name="SConcerts" component={ConcertsScreen} />
     </Stack.Navigator>
   );
 };

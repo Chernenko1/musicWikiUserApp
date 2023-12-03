@@ -1,16 +1,18 @@
 import React, {useState, useEffect, useContext} from 'react';
-import {View, StyleSheet, Image, ScrollView} from 'react-native';
+import {View, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import {Text} from 'react-native-paper';
-import Icon from 'react-native-vector-icons/Ionicons';
+import {useNavigation} from '@react-navigation/native';
 
+import Icon from 'react-native-vector-icons/Ionicons';
 import {COLORS} from '../../../themes/COLORS';
 import {InfoContext} from '../../../context/InfoContext';
 import {fetchConcerts} from '../../../http/concertAPI';
 
 export const ConcertPrev = () => {
-  const [conserts, setConcerts] = useState<Concert[]>([]);
+  const [concerts, setConcerts] = useState<Concert[]>([]);
 
   const id = useContext(InfoContext);
+  const navigation = useNavigation();
 
   useEffect(() => {
     fetchConcerts(id).then((data: any) => setConcerts(data));
@@ -22,18 +24,22 @@ export const ConcertPrev = () => {
         <Text style={[styles.headerText, {fontSize: 25, fontWeight: '700'}]}>
           Концерты
         </Text>
-        <View style={{flexDirection: 'row', columnGap: 2}}>
-          <Text style={[styles.headerText, {fontSize: 17}]}>Всё</Text>
-          <Icon
-            name="chevron-forward-outline"
-            style={{color: COLORS.TEXT_GRAY_COLOR, top: 4}}
-            size={18}
-          />
-        </View>
+        <TouchableOpacity
+          onPress={() => navigation.push('SConcerts', {concerts})}
+          activeOpacity={0.7}>
+          <View style={{flexDirection: 'row', columnGap: 2}}>
+            <Text style={[styles.headerText, {fontSize: 17}]}>Всё</Text>
+            <Icon
+              name="chevron-forward-outline"
+              style={{color: COLORS.TEXT_GRAY_COLOR, top: 4}}
+              size={18}
+            />
+          </View>
+        </TouchableOpacity>
       </View>
 
       <View>
-        {conserts.map(
+        {concerts.map(
           (itm, ind) =>
             ind < 2 && (
               <View key={itm.id + 'pr'} style={styles.content}>
@@ -81,7 +87,6 @@ const styles = StyleSheet.create({
   },
   titleText: {
     color: COLORS.TEXT_GRAY_COLOR,
-    maxWidth: '90%',
     fontSize: 16,
   },
   headerText: {
