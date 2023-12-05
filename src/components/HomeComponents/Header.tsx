@@ -1,8 +1,10 @@
 import React, {useState} from 'react';
-import {StyleSheet, View, FlatList} from 'react-native';
+import {StyleSheet, View, FlatList, TouchableOpacity} from 'react-native';
 import {Text, TouchableRipple} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {useAppSelector} from '../../redux/hooks';
+import {useNavigation} from '@react-navigation/native';
+
 import {COLORS} from '../../themes/COLORS';
 
 interface Props {
@@ -12,6 +14,7 @@ interface Props {
 export const Header = ({handleId}: Props) => {
   const [isActive, setActive] = useState(0);
 
+  const navigation = useNavigation();
   const mStyles = useAppSelector(state => state.groups.musicStyleData);
 
   const setId = (id: number) => {
@@ -22,7 +25,11 @@ export const Header = ({handleId}: Props) => {
     <View style={styles.container}>
       <View style={styles.search_container}>
         <Icon name="search-outline" size={30} color={COLORS.TEXT_GRAY_COLOR} />
-        <Icon name="menu-outline" size={30} color={COLORS.TEXT_GRAY_COLOR} />
+        <TouchableOpacity
+          activeOpacity={0.7}
+          onPress={() => navigation.push('Fav')}>
+          <Icon name="menu-outline" size={30} color={COLORS.TEXT_GRAY_COLOR} />
+        </TouchableOpacity>
       </View>
       <View style={styles.title}>
         <Text style={styles.title_text}>GROUPS</Text>

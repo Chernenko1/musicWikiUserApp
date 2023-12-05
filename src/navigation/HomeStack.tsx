@@ -11,6 +11,8 @@ import {AwardsScreen} from '../screens/AwardsScreen';
 import {PRScreen} from '../screens/PressReleasesScreen';
 import {ConcertsScreen} from '../screens/ConcertsScreen';
 import {Player} from '../screens/PlayerScreen';
+import {DrawerStack} from './DrawerStack';
+import {Favourite} from '../screens/Drawer/FavouriteScreen';
 
 const nativeStackOption: NativeStackNavigationOptions = {
   headerShown: false,
@@ -36,6 +38,7 @@ export type HomeParamList = {
   Player: {
     info: Song;
   };
+  Fav: undefined;
 };
 
 const Stack = createNativeStackNavigator<HomeParamList>();
@@ -50,6 +53,7 @@ export const HomeStack = () => {
       <Stack.Screen name="SPR" component={PRScreen} />
       <Stack.Screen name="SConcerts" component={ConcertsScreen} />
       <Stack.Screen name="Player" component={Player} />
+      <Stack.Screen name="Fav" component={Favourite} />
     </Stack.Navigator>
   );
 };

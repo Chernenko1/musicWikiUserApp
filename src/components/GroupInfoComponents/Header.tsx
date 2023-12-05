@@ -51,7 +51,8 @@ const styles = StyleSheet.create({
     width: 180,
     height: 180,
     position: 'absolute',
-    left: -20,
+    left: -10,
+    top: 10,
   },
   links: {
     alignItems: 'flex-end',

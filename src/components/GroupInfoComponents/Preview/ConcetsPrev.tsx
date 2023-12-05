@@ -88,6 +88,7 @@ const styles = StyleSheet.create({
   titleText: {
     color: COLORS.TEXT_GRAY_COLOR,
     fontSize: 16,
+    width: '80%',
   },
   headerText: {
     color: COLORS.TEXT_GRAY_COLOR,

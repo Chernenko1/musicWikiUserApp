@@ -37,9 +37,7 @@ export const GroupCards = ({mid = 0}: Props) => {
             rippleColor="gray"
             style={{marginBottom: 20, marginTop: 2}}>
             <GroupCard
-              image={
-                'https://1000marcas.net/wp-content/uploads/2020/03/Logo-Queen-2048x1280.png'
-              }
+              image={'http://10.0.2.2:4848/' + item['image.image_data']}
               title={item.group_name}
               style={item['music_style.style_name']}
             />

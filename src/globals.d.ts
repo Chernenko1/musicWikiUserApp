@@ -93,4 +93,5 @@ declare interface Group {
   music_style_id: number;
   'city.city_name'?: string;
   'music_style.style_name'?: string;
+  'image.image_data': string;
 }

@@ -1,7 +1,8 @@
 import {combineReducers, configureStore} from '@reduxjs/toolkit';
-import groupReducer from './slices/groupSlice';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {persistReducer, persistStore} from 'redux-persist';
+import groupReducer from './slices/groupSlice';
+import favouriteReducer from './slices/favouriteSlice';
 
 const groupPersistConfig = {
   key: 'groups',
@@ -9,10 +10,20 @@ const groupPersistConfig = {
   // whitelist: ['groupsData'],
 };
 
+const favouritePersistConfig = {
+  key: 'favourite',
+  storage: AsyncStorage,
+};
+
 const groupsPersistReducer = persistReducer(groupPersistConfig, groupReducer);
+const favouritePersistReducer = persistReducer(
+  favouritePersistConfig,
+  favouriteReducer,
+);
 
 const reducers = combineReducers({
   groups: groupsPersistReducer,
+  fav: favouritePersistReducer,
 });
 
 export const store = configureStore({

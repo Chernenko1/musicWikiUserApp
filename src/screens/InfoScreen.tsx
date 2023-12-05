@@ -22,9 +22,7 @@ export const InfoScreen: React.FC<Props> = ({navigation, route}) => {
     <InfoContext.Provider value={id}>
       <View style={{flex: 1, backgroundColor: COLORS.DARK_GRAY}}>
         <Header
-          image={
-            'https://1000marcas.net/wp-content/uploads/2020/03/Logo-Queen-2048x1280.png'
-          }
+          image={'http://10.0.2.2:4848/' + group?.['image.image_data']}
           navigation={navigation}
         />
         <Inforamtion data={group} navigation={navigation} />
